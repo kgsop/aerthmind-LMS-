@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aethermind - Dashboard</title>
+    <meta name="description" content="Aethermind learning dashboard overview">
+    <meta name="keywords" content="learning, dashboard, courses, education">
+    <meta property="og:title" content="Aethermind Dashboard">
+    <meta property="og:description" content="Your learning journey overview">
+    <meta name="twitter:title" content="Aethermind Dashboard">
+    <meta name="twitter:description" content="Your learning journey overview">
+
+    <!-- ── Env vars baked in at build time by scripts/inject-env.js ────────── -->
+    <script src="/env.js"></script>
+
+    <!-- ── Firebase SDKs (compat / v8 API — matches existing storage.js) ───── -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <!-- ── React + Babel ──────────────────────────────────────────────────── -->
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-color: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --stat-1-bg: #6366f1;
+            --stat-2-bg: #a855f7;
+            --stat-3-bg: #0f172a;
+        }
+    }
+
+    @layer base {
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    }
+
+    @layer components {
+        .nav-item {
+            @apply flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors duration-200 cursor-pointer text-gray-600 hover:bg-gray-50;
+        }
+        .nav-item.active {
+            @apply bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)];
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- ── Firebase initialisation (must run before any storage calls) ─────── -->
+    <script type="text/babel" src="utils/firebase.js"></script>
+
+    <!-- ── Components ────────────────────────────────────────────────────── -->
+    <script type="text/babel" src="components/Sidebar.js"></script>
+    <script type="text/babel" src="components/StatCard.js"></script>
+    <script type="text/babel" src="components/CourseCard.js"></script>
+    <script type="text/babel" src="components/ErrorState.js"></script>
+    <script type="text/babel" src="components/AlertToast.js"></script>
+    <script type="text/babel" src="components/AIGeneratedQuizModal.js"></script>
+    <script type="text/babel" src="components/PaymentModal.js"></script>
+    <script type="text/babel" src="components/CourseEditModal.js"></script>
+    <script type="text/babel" src="components/RatingWidget.js"></script>
+    <script type="text/babel" src="components/DashboardLayout.js"></script>
+
+    <!-- ── Pages ─────────────────────────────────────────────────────────── -->
+    <script type="text/babel" src="pages/Landing.js"></script>
+    <script type="text/babel" src="pages/Login.js"></script>
+    <script type="text/babel" src="pages/Dashboard.js"></script>
+    <script type="text/babel" src="pages/BrowseCourses.js"></script>
+    <script type="text/babel" src="pages/CreateCourse.js"></script>
+    <script type="text/babel" src="pages/AITutor.js"></script>
+    <script type="text/babel" src="pages/PracticeQuiz.js"></script>
+    <script type="text/babel" src="pages/Recommendations.js"></script>
+    <script type="text/babel" src="pages/CoursePlayer.js"></script>
+    <script type="text/babel" src="pages/Settings.js"></script>
+
+    <!-- ── Utils ─────────────────────────────────────────────────────────── -->
+    <script type="text/babel" src="utils/storage.js"></script>
+    <script type="text/babel" src="utils/aiClient.js"></script>
+
+    <!-- ── App entry ─────────────────────────────────────────────────────── -->
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "aethermind",
+  "version": "1.0.0",
+  "description": "Aethermind LMS — Firebase + Netlify ready",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/inject-env.js && node scripts/build.js",
+    "dev": "node scripts/inject-env.js && node scripts/build.js && npx serve dist -p 3000",
+    "inject-env": "node scripts/inject-env.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

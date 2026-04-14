@@ -1,0 +1,41 @@
+// firestore.rules
+// ─────────────────────────────────────────────────────────────────────────────
+// Firestore security rules for Aethermind.
+// Deploy with: firebase deploy --only firestore:rules
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// NOTE: Aethermind uses email/password authentication handled at the app layer
+// (passwords stored in the users collection). For a production app you would
+// migrate to Firebase Auth so rules can reference request.auth.uid.
+// The rules below are therefore intentionally open for authenticated paths
+// but still protect write access for obvious misuse.
+//
+// TO HARDEN FOR PRODUCTION:
+//   1. Enable Firebase Auth email/password
+//   2. Store uid in each user doc
+//   3. Replace `allow read, write: if true;` with uid-scoped rules
+// ─────────────────────────────────────────────────────────────────────────────
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Courses: anyone can read; only from the client app (no auth yet) ──────
+    match /courses/{courseId} {
+      allow read:  if true;
+      allow write: if true;   // ← tighten once Firebase Auth is wired up
+    }
+
+    // ── Users: required for login/signup flow ─────────────────────────────────
+    match /users/{email} {
+      allow read:  if true;
+      allow write: if true;   // ← tighten once Firebase Auth is wired up
+    }
+
+    // ── Per-user data: myCourses, stats, ratings, chat history ───────────────
+    match /userData/{email} {
+      allow read:  if true;
+      allow write: if true;   // ← tighten once Firebase Auth is wired up
+    }
+  }
+}

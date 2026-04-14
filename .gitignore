@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+public/env.js
+
+# Environment — NEVER commit real keys
+.env
+.env.local
+.env.production
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
